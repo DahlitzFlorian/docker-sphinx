@@ -1,48 +1,31 @@
 # Sphinx docs in Docker
 
-[Sphinx](http://www.sphinx-doc.org/en/stable/) is a tool that makes it easy to create intelligent and beautiful documentation. It is also the technology that [ReadTheDocs](https://readthedocs.org/) uses to build their documentation. This image helps you get started with sphinx without installing any dependencies on your computer. The only prerequirement is [Docker](http://docker.com/).
+[Sphinx](http://www.sphinx-doc.org/en/stable/) is a tool that makes it easy to create intelligent and beautiful documentation.
+It is also the technology that [ReadTheDocs](https://readthedocs.org/) uses to build their documentation.
+This image helps you get started with sphinx without installing any dependencies on your computer.
+The only prerequirement is [Docker](http://docker.com/).
 
-## Installation
 
-The image is publish on [docker hub](http://hub.docker.com/) named [`pardahlman/sphinx`](https://hub.docker.com/r/pardahlman/sphinx/).
+## Usage
 
-### New documentation
+This Docker image is meant to be used as a base image.
 
-For new documentation create a folder for the documentation
+```Dockerfile
+FROM floriandahlitz/docker-sphinx
 
-```bash
-mkdir docs
+COPY ./docs /docs
 ```
 
-Then run the following docker command
+The above configuration assumes the default sphinx setup.
+To serve it simply run:
 
-```bash
-docker run -d  -v $PWD/docs:/docs -p 8000:8000 pardahlman/sphinx
+```shell
+$ docker image build -t doc .
+$ docker container run --rm --name doc -it -p 9340:8000 doc
 ```
 
-This creates a docker container that mounts the `docs` directory to `/docs` (where the documentation is expected to be). Use `docker ps` to find the ID of the newly created container. Then initiate the documentation with the following command (replace `92` with the id of your container)
+... and visit `localhost:9340` to see the result.
 
-```bash
-docker exec -it 92 sphinx-quickstart
-```
-
-Once the setup is done, restart the sphinx container
-
-```bash
-docker container restart 92
-```
-
-Open a browser and navigate to `localhost:8000`.
-
-### Existing documentation
-
-Simply run
-
-```bash
-docker run -d  -v /path/to/docs:/docs -p 8000:8000 pardahlman/sphinx
-```
-
-Open a browser and navigate to `localhost:8000`.
 
 ## Read the docs theme
 
