@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 if [ ! -f ./conf.py ]; then
     echo "== Sphinx docs is not initialized =="
     echo " - Map a volume to /docs to work on existing documentaiton"
