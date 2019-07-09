@@ -5,7 +5,7 @@ EXPOSE 8000
 RUN mkdir /docs
 WORKDIR /docs
 
-RUN pip install sphinx sphinx-autobuild recommonmark sphinx_rtd_theme
+RUN pip install sphinx sphinx-autobuild recommonmark sphinx_rtd_theme sphinx-markdown-tables
 
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 
